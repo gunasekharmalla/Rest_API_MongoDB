@@ -177,8 +177,11 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
 */
+const uri = process.env.MONGO_URI;
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,})
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ Could not connect:", err));
 
