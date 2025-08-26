@@ -4,7 +4,7 @@ const app = express();
 const {v4: uuidv4} = require("uuid");
 const mongoose = require("mongoose");
 const User = require("./models/users");   
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json()); 
 
@@ -161,10 +161,27 @@ app.get("/users", async (req, res) => {
      }
 })
 
+/*
 
 mongoose.connect("mongodb://127.0.0.1:27017/mydb") 
   .then(() => console.log(" MongoDB connected"))
   .catch(err => console.error(" MongoDB connection error:", err));
+
+
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
+*/
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB Atlas"))
+  .catch((err) => console.error("❌ Could not connect:", err));
+
 
 
 
